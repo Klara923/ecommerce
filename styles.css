@@ -1,0 +1,10 @@
+.cart-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
