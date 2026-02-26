@@ -3,17 +3,46 @@
   height: 24px;
 }
 
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+
+  ul {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    li {
+      list-style: none;
+    }
+  }
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .products-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
 }
 
+.product-img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+}
+
 .logo-img {
-  width: 200px;
-  height: 100px;
+  width: 100px;
+  position: absolute;
 }
 
 .logo-text-img {
   width: 500px;
+  margin-left: 30px;
 }
