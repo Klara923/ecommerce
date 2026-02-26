@@ -8,3 +8,12 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
 }
+
+.logo-img {
+  width: 200px;
+  height: 100px;
+}
+
+.logo-text-img {
+  width: 500px;
+}

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/styles.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li>
+          <a href="cart.html"
+            ><img class="cart-icon" src="icons/cart.svg" alt="Shopping Cart"
+          /></a>
+        </li>
+      </ul>
+    </nav>
+    <main id="product-details"></main>
+    <div id="cart-actions"></div>
+    <script>
+      // Example product data
+      const products = {
+        1: {
+          name: "Product 1",
+          description: "Description for product 1",
+          price: "$10",
+        },
+        2: {
+          name: "Product 2",
+          description: "Description for product 2",
+          price: "$20",
+        },
+        3: {
+          name: "Product 3",
+          description: "Description for product 3",
+          price: "$30",
+        },
+        4: {
+          name: "Product 4",
+          description: "Description for product 4",
+          price: "$40",
+        },
+        5: {
+          name: "Product 5",
+          description: "Description for product 5",
+          price: "$50",
+        },
+        6: {
+          name: "Product 6",
+          description: "Description for product 6",
+          price: "$60",
+        },
+        7: {
+          name: "Product 7",
+          description: "Description for product 7",
+          price: "$70",
+        },
+        8: {
+          name: "Product 8",
+          description: "Description for product 8",
+          price: "$80",
+        },
+        9: {
+          name: "Product 9",
+          description: "Description for product 9",
+          price: "$90",
+        },
+      };
+
+      // Get product id from URL
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+      const product = products[id];
+      const details = document.getElementById("product-details");
+      const cartActions = document.getElementById("cart-actions");
+
+      // Simple cart using localStorage
+      function getCart() {
+        return JSON.parse(localStorage.getItem("cart") || "[]");
+      }
+      function setCart(cart) {
+        localStorage.setItem("cart", JSON.stringify(cart));
+      }
+      function inCart(productId) {
+        return getCart().includes(productId);
+      }
+      function addToCart(productId) {
+        const cart = getCart();
+        if (!cart.includes(productId)) {
+          cart.push(productId);
+          setCart(cart);
+        }
+        renderCartActions();
+      }
+      function removeFromCart(productId) {
+        let cart = getCart();
+        cart = cart.filter((id) => id !== productId);
+        setCart(cart);
+        renderCartActions();
+      }
+
+      function renderCartActions() {
+        if (!product) {
+          cartActions.innerHTML = "";
+          return;
+        }
+        if (inCart(id)) {
+          cartActions.innerHTML = `<button onclick="removeFromCart('${id}')">Remove from Cart</button>`;
+        } else {
+          cartActions.innerHTML = `<button onclick="addToCart('${id}')">Add to Cart</button>`;
+        }
+      }
+
+      if (product) {
+        details.innerHTML = `<h1>${product.name}</h1><p>${product.description}</p><p>Price: ${product.price}</p>`;
+      } else {
+        details.innerHTML = "<p>Product not found.</p>";
+      }
+      renderCartActions();
+    </script>
+  </body>
+</html>
