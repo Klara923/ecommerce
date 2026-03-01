@@ -7,44 +7,34 @@
     <title>Cart</title>
   </head>
   <body>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="pages/products.html">Products</a></li>
-        <li>
-          <a href="cart.html"
-            ><img class="cart-icon" src="icons/cart.svg" alt="Shopping Cart"
-          /></a>
-        </li>
-      </ul>
-    </nav>
+    <header>
+      <nav>
+        <a href="index.html" class="logo"
+          ><img class="logo-img" src="images/logo.webp" />
+          <img class="logo-text-img" src="images/logo-text.png" />
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li>
+            <a href="cart.html">
+              <span class="cart-icon-wrap">
+                <img
+                  class="cart-icon"
+                  src="icons/cart.svg"
+                  alt="Shopping Cart"
+                />
+                <span id="cart-counter" class="counter">0</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
     <h1>Your Cart</h1>
     <ul id="cart-list"></ul>
+    <script src="js/main.js"></script>
     <script>
-      // Same product data as in product.html
-      const products = {
-        1: { name: "Product 1", price: "$10" },
-        2: { name: "Product 2", price: "$20" },
-        3: { name: "Product 3", price: "$30" },
-        4: { name: "Product 4", price: "$40" },
-        5: { name: "Product 5", price: "$50" },
-        6: { name: "Product 6", price: "$60" },
-        7: { name: "Product 7", price: "$70" },
-        8: { name: "Product 8", price: "$80" },
-        9: { name: "Product 9", price: "$90" },
-      };
-      function getCart() {
-        return JSON.parse(localStorage.getItem("cart") || "[]");
-      }
-      function setCart(cart) {
-        localStorage.setItem("cart", JSON.stringify(cart));
-      }
-      function removeFromCart(productId) {
-        let cart = getCart();
-        cart = cart.filter((id) => id !== productId);
-        setCart(cart);
-        renderCart();
-      }
       function renderCart() {
         const cart = getCart();
         const list = document.getElementById("cart-list");
@@ -53,12 +43,19 @@
           return;
         }
         list.innerHTML = cart
-          .map((id) =>
-            products[id]
-              ? `<li>${products[id].name} - ${products[id].price} <button onclick="removeFromCart('${id}')">Remove</button></li>`
+          .map((id, index) =>
+            PRODUCTS[id]
+              ? `<li>${PRODUCTS[id].name} <button type="button" data-cart-index="${index}">Remove</button></li>`
               : "",
           )
           .join("");
+        list.querySelectorAll("[data-cart-index]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            removeFromCartByIndex(Number(btn.getAttribute("data-cart-index")));
+            renderCart();
+            updateCartCounter();
+          });
+        });
       }
       renderCart();
     </script>

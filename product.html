@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Products</title>
+    <title>Product</title>
+    <script src="js/main.js" defer></script>
     <link rel="stylesheet" href="styles/styles.css" />
   </head>
   <body>
@@ -17,20 +18,30 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="products.html">Products</a></li>
           <li>
-            <a href="cart.html"
-              ><img class="cart-icon" src="icons/cart.svg" alt="Shopping Cart"
-            /></a>
+            <a href="cart.html">
+              <span class="cart-icon-wrap">
+                <img
+                  class="cart-icon"
+                  src="icons/cart.svg"
+                  alt="Shopping Cart"
+                />
+                <span id="cart-counter" class="counter">0</span>
+              </span>
+            </a>
           </li>
         </ul>
       </nav>
     </header>
-    <section>
-      <figure>
-        <img class="product-img" src="images/products/pet2.webp" alt="Rat" />
-        <figcaption>Rat</figcaption>
-      </figure>
-
-      <button>Buy</button>
+    <section id="product-detail" class="product-detail">
+      <div>
+        <figure>
+          <img id="product-image" class="product-img" src="" alt="" />
+          <figcaption id="product-name"></figcaption>
+        </figure>
+      </div>
+      <div>
+        <button id="buy-btn" class="add-to-cart-btn">Add to cart</button>
+      </div>
     </section>
   </body>
 </html>
