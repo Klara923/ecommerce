@@ -31,33 +31,13 @@
         </ul>
       </nav>
     </header>
-    <h1>Your Cart</h1>
-    <ul id="cart-list"></ul>
+    <main>
+      <h1>Your Cart</h1>
+      <ul id="cart-list"></ul>
+    </main>
     <script src="js/main.js"></script>
-    <script>
-      function renderCart() {
-        const cart = getCart();
-        const list = document.getElementById("cart-list");
-        if (cart.length === 0) {
-          list.innerHTML = "<li>Your cart is empty.</li>";
-          return;
-        }
-        list.innerHTML = cart
-          .map((id, index) =>
-            PRODUCTS[id]
-              ? `<li>${PRODUCTS[id].name} <button type="button" data-cart-index="${index}">Remove</button></li>`
-              : "",
-          )
-          .join("");
-        list.querySelectorAll("[data-cart-index]").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            removeFromCartByIndex(Number(btn.getAttribute("data-cart-index")));
-            renderCart();
-            updateCartCounter();
-          });
-        });
-      }
-      renderCart();
-    </script>
+    <footer>
+      <p>&copy; 2026 Biggie Cheese. All rights reserved.</p>
+    </footer>
   </body>
 </html>
