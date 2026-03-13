@@ -56,7 +56,14 @@ const PRODUCTS = {
 const CART_KEY = "cart";
 
 function getCart() {
-  return JSON.parse(localStorage.getItem(CART_KEY));
+  const stored = localStorage.getItem(CART_KEY);
+  if (!stored) return [];
+  try {
+    const parsed = JSON.parse(stored);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
 }
 
 function setCart(cart) {
@@ -64,7 +71,8 @@ function setCart(cart) {
 }
 
 function addToCart(productId) {
-  const id = productId;
+  const id = Number(productId);
+  if (!PRODUCTS[id]) return;
   const cart = getCart();
   cart.push(id);
   setCart(cart);
@@ -72,7 +80,7 @@ function addToCart(productId) {
 
 function removeFromCartByIndex(index) {
   const cart = getCart();
-  cart.splice(index, 1);
+  cart.splice(Number(index), 1);
   setCart(cart);
 }
 
