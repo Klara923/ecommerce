@@ -177,6 +177,14 @@ footer {
     align-items: flex-start;
   }
 
+  .logo-text-img {
+    width: 200px;
+  }
+
+  .logo-img {
+    width: 50px;
+  }
+
   .products-grid {
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: auto;
